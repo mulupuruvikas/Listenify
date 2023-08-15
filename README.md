@@ -9,6 +9,4 @@ After the user logs in to their spotify account, their listening history and sta
 
 
 ## Dev Info
-Client ID: 0b57a117aac44afc882869dd0aa94e8c
-Client secret: 7058a918a1114d498a70ff84bffd3fcc
 
