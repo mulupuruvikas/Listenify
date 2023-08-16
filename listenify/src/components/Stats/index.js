@@ -3,7 +3,7 @@ import './index.scss'
 
 const Stats = () => {
     return (
-
+        <h1>Stats page starts here.</h1>
     )
 }
 
