@@ -3,13 +3,17 @@ import './index.scss';
 import axios from 'axios';
 
 const Login = () => {
-    const clientId = '0b57a117aac44afc882869dd0aa94e8c';
-    const redirectUri = "http:\/\/localhost:3000/explore";
+    const clientId = 'e7c4f61b0cad4ef29625b7f21946d174';
+    const redirectUri = "http://localhost:3000";
+    const authEndpoint = "https://accounts.spotify.com/authorize"
+    const responseType = "token"
+
 
     // ** ADD THE ACTUAL SCOPES **
     const scopes = ['user-read-private', 'user-read-email'];
 
-    const authUrl = `https:\/\/accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token`;
+    const authURL = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}`
+    // const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token`;
 
     const token = window.location.hash
         .substring(1)
@@ -37,10 +41,9 @@ const Login = () => {
         console.error('Error fetching user data:', error);
     });
     return (
-        <div>
-        <h1>Welcome to My App</h1>
-        <p>Please authorize your Spotify account to access your music.</p>
-        <a href={authUrl}>Authorize with Spotify</a>
+        <div class='container'>
+            <h1 id='login-title'>Welcome to Listenify</h1>
+            <a id='authorization-link' href={authURL}>Authorize with Spotify</a>
         </div>
     )
 }

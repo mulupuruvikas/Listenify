@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+#login-title {
+    margin: 0;
+    padding: 0;
+}
+
+#authorization-link {
+    margin: 5vh;
+    padding: 0;
+}
