@@ -1,6 +1,5 @@
 import React from 'react';
 import './index.scss';
-import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +15,7 @@ const Login = () => {
 
 
     // ** ADD THE ACTUAL SCOPES **
-    const scopes = ['user-read-private', 'user-read-email'];
+    const scopes = ['user-read-private', 'user-read-email', 'user-read-recently-played'];
 
     const authURL = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}`
     // const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token`;
@@ -48,7 +47,7 @@ const Login = () => {
             spotify.setAccessToken(spotifytoken);
             spotify.getMe().then((user)=> {
                 console.log("THIS IS YOU: ", user)
-                navigate("/activity", { state: { person: user } });
+                navigate("/activity", { state: { person: user, token: spotifytoken} });
             });
         }  
     })  
