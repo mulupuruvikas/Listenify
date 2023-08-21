@@ -13,14 +13,14 @@ const Stats = () => {
     const imageUrl = person.images[0].url;
     const [recentTracks, setRecentTracks] = useState([]);
     useEffect(() => {
-        axios.get('https://api.spotify.com/v1/me/player/recently-played', {
+        console.log(`Bearer ${access_token}`);
+        axios.get(`https://api.spotify.com/v1/me/player/recently-played?limit=${10}`, {
             headers: {
-                Authorization: 'Bearer ${access_token}'
+                Authorization: `Bearer ${access_token}`,
             },
         })
         .then(response => {
-            setRecentTracks(response.data.items);
-            console.log("Successfully fetched recent tracks!");
+            console.log(response.data)
         })
         .catch(error => {
             console.error("Error fetching recent tracks: ", error);
