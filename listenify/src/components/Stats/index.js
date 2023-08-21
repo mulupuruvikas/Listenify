@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.scss'
-import getTokenFromUrl from '../Login/index'
+import {getTokenFromUrl} from '../Login/index'
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -12,9 +12,10 @@ const Stats = () => {
     console.log(location.state);
     const imageUrl = person.images[0].url;
     const [recentTracks, setRecentTracks] = useState([]);
+    const RECENT_TRACKS_API_URL = "https://api.spotify.com/v1/me/player/recently-played?limit=50";
     useEffect(() => {
         console.log(`Bearer ${access_token}`);
-        axios.get(`https://api.spotify.com/v1/me/player/recently-played?limit=${10}`, {
+        axios.get(RECENT_TRACKS_API_URL, {
             headers: {
                 Authorization: `Bearer ${access_token}`,
             },
@@ -25,7 +26,7 @@ const Stats = () => {
         .catch(error => {
             console.error("Error fetching recent tracks: ", error);
         })
-    })
+    }, [])
 
     return (
         <div className="explore">

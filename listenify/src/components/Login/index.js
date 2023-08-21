@@ -4,6 +4,19 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const getTokenFromUrl = () => { 
+    return window.location.hash
+        .substring(1)
+        .split('&')
+        .reduce((initial, item) => {
+            let parts = item.split("=");
+            initial[parts[0]] = decodeURIComponent(parts[1])
+
+            return initial;
+        }, {});
+};
+
+
 const Login = () => {
     const clientId = 'e7c4f61b0cad4ef29625b7f21946d174';
     const redirectUri = "http://localhost:3000";
@@ -20,17 +33,7 @@ const Login = () => {
     const authURL = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}`
     // const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token`;
 
-    const getTokenFromUrl = () => { 
-        return window.location.hash
-            .substring(1)
-            .split('&')
-            .reduce((initial, item) => {
-                let parts = item.split("=");
-                initial[parts[0]] = decodeURIComponent(parts[1])
-
-                return initial;
-            }, {});
-    }
+    
     const apiUrl = 'https://accounts.spotify.com/api/token';
 
     useEffect(() => {
@@ -46,11 +49,11 @@ const Login = () => {
 
             spotify.setAccessToken(spotifytoken);
             spotify.getMe().then((user)=> {
-                console.log("THIS IS YOU: ", user)
+
                 navigate("/activity", { state: { person: user, token: spotifytoken} });
             });
         }  
-    })  
+    }, [])  
 
     return (
         <div className='container'>
@@ -60,4 +63,5 @@ const Login = () => {
     )
 }
 
-export default Login
+export {getTokenFromUrl};
+export default Login;
