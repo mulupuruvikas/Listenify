@@ -1,44 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.scss'
-import {getTokenFromUrl} from '../Login/index'
 import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Stats = () => {
-    const location = useLocation();
-    const person = location.state.person;
-    const access_token = location.state.token;
-    console.log(location.state);
-    const imageUrl = person.images[0].url;
-    const [recentTracks, setRecentTracks] = useState([]);
-    const RECENT_TRACKS_API_URL = "https://api.spotify.com/v1/me/player/recently-played?limit=50";
-    useEffect(() => {
-        console.log(`Bearer ${access_token}`);
-        axios.get(RECENT_TRACKS_API_URL, {
-            headers: {
-                Authorization: `Bearer ${access_token}`,
-            },
-        })
-        .then(response => {
-            console.log(response.data)
-        })
-        .catch(error => {
-            console.error("Error fetching recent tracks: ", error);
-        })
-    }, [])
+  const location = useLocation();
+  const token = location.state.AccessToken;
+  useEffect(() => {
+    
+    if (token) {
+      console.log("TOKEN FOUND:", token);
+      const apiEndpoint = 'https://api.spotify.com/v1/me/player/recently-played';
 
+      // Make the Axios GET request
+      axios
+        .get(apiEndpoint, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          // Handle the response data here
+          const recentlyPlayedTracks = response.data.items;
+          console.log(recentlyPlayedTracks);
+        })
+        .catch((error) => {
+          // Handle any errors
+          console.error('Error fetching recently played tracks:', error);
+        });
+    } else {
+      console.log("TOKEN IS EMPTY");
+    }
+  })
     return (
-        <div className="explore">
-            <div className="profile-bar">
-                <img className="pfp" src={imageUrl} alt="Not found" />
-                <h2>{person.display_name}</h2>
-            </div>
-            <div className="recently-played">
-                <h1>Recently played</h1>
-            </div>
-        </div>
-        
+        <h1>{token}</h1>
     )
 }
 
