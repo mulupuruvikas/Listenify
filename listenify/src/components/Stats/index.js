@@ -50,22 +50,26 @@ const Stats = () => {
 
   return (
     <div>
-      <h1>Recently Played Tracks</h1>
-      <table border="1">
-        <thead>
-        </thead>
-        <tbody>
-          {recentlyPlayed.map((item, index) => (
-            <tr key={index}>
-              <td>
-                <img src={item.track.album.images[0].url} alt="Item" width="100" height="100" />
-              </td>
-              <td>{item.track.name}</td>
-              <td>{item.track.artists[0].name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="recently-played">
+        <h1>Recently Played Tracks</h1>
+        
+        <table border="1">
+          <thead>
+          </thead>
+          <tbody>
+            {recentlyPlayed.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  <img src={item.track.album.images[0].url} alt="Item" width="100" height="100" />
+                </td>
+                <td><b>{item.track.name}</b></td>
+                <td>{item.track.artists[0].name}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>  
+      </div>
+      
     </div>
   )
 }
