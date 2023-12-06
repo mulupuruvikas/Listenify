@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Listenify/static/css/main.2ffef4b6.css",
+    "main.js": "/Listenify/static/js/main.f043b08a.js",
+    "static/js/787.55b886df.chunk.js": "/Listenify/static/js/787.55b886df.chunk.js",
+    "index.html": "/Listenify/index.html",
+    "main.2ffef4b6.css.map": "/Listenify/static/css/main.2ffef4b6.css.map",
+    "main.f043b08a.js.map": "/Listenify/static/js/main.f043b08a.js.map",
+    "787.55b886df.chunk.js.map": "/Listenify/static/js/787.55b886df.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2ffef4b6.css",
+    "static/js/main.f043b08a.js"
+  ]
+}
